@@ -1,6 +1,6 @@
 // src/App.jsx
-import { useState } from 'react';
-import StartScreen from './StartScreen'; // StartScreen.jsx 是同级文件
+import { useState } from 'react.jsx';
+import StartScreen from './StartScreen.jsx'; // StartScreen.jsx 是同级文件
 
 // === 核心修正：明确告诉 Vite 文件的完整路径和后缀 ===
 import PeakBP from './modes/PeakBP.jsx';

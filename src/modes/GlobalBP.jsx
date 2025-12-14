@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { heroes } from '../heroes';
-import TeamPanel from '../components/TeamPanel';
-
+import TeamPanel from '../components/TeamPanel.jsx'; // <-- 加上 .jsx
 // ... (剧本STEPS保持不变)
 
 const INITIAL_STATE = { bans: [], picks: [] };

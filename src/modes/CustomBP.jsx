@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { heroes } from '../heroes';
-import TeamPanel from '../components/TeamPanel';
+import TeamPanel from '../components/TeamPanel.jsx'; // <-- 加上 .jsx
 
 export default function CustomBP({ onBack }) {
   const [searchTerm, setSearchTerm] = useState('');

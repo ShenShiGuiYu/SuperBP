@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { heroes } from '../heroes';
-import TeamPanel from '../components/TeamPanel';
+import TeamPanel from '../components/TeamPanel.jsx'; // <-- 加上 .jsx
 import HeroFilter from '../components/HeroFilter'; // 🔥 引入我们的新组件
 
 // 巅峰赛剧本 (保持不变)
