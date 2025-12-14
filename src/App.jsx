@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState } from 'react.jsx';
+import { useState } from 'react';
 import StartScreen from './StartScreen.jsx'; // StartScreen.jsx 是同级文件
 
 // === 核心修正：明确告诉 Vite 文件的完整路径和后缀 ===
