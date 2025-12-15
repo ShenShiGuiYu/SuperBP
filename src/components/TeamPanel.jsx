@@ -1,7 +1,6 @@
 /**
  * @file TeamPanel.jsx
- * @description 通用队伍面板组件 (美术升级版)
- * @param {boolean} isBanPhase - 当前是否处于禁用阶段
+ * @description 通用队伍面板组件 (终极版)
  */
 
 import React from 'react';
@@ -19,11 +18,7 @@ export default function TeamPanel({ side, state, heroes, active, isBanPhase, ban
       w-24 md:w-36 flex flex-col shrink-0 relative
       ${isBlue ? 'bg-gradient-to-r from-slate-900/50 to-transparent' : 'bg-gradient-to-l from-slate-900/50 to-transparent'}
     `}>
-      {/* 队名 */}
-      <div className={`
-        py-3 text-center font-black tracking-widest text-lg z-10 transition-colors 
-        ${isBlue ? 'text-blue-400' : 'text-red-400'} bg-black/30
-      `}>
+      <div className={`py-3 text-center font-black tracking-widest text-lg z-10 ${isBlue ? 'text-blue-400' : 'text-red-400'} bg-black/30`}>
         {isBlue ? 'BLUE' : 'RED'}
       </div>
 
@@ -44,26 +39,21 @@ export default function TeamPanel({ side, state, heroes, active, isBanPhase, ban
                {hero ? (
                  <>
                    <img src={getAvatar(hero)} className="w-full h-full object-cover grayscale opacity-60" />
-                   {/* 优雅的禁用蒙层，代替红叉 */}
                    <div className="absolute inset-0 bg-black/40"></div>
                  </>
                ) : (
-                 <span className={`
-                   text-xs font-mono transition-colors
-                   ${isCurrentBanSlot ? 'text-white' : 'text-slate-700'}
-                 `}>
-                   X
-                 </span>
+                 <span className={`text-xs font-mono transition-colors ${isCurrentBanSlot ? 'text-white' : 'text-slate-700'}`}>X</span>
                )}
             </div>
           )
         })}
       </div>
 
-      {/* === Pick 选择区 (保持不变) === */}
+      {/* === Pick 选择区 === */}
       <div className="flex-1 flex flex-col p-2 gap-2 overflow-y-auto no-scrollbar">
         {displayPicks.map((heroId, index) => {
           const hero = heroId ? heroes.find(h => h.id === heroId) : null;
+          // 🔥 最终高亮逻辑
           const isCurrentPickSlot = active && !isBanPhase && (state.picks.length === index);
           
           return (
