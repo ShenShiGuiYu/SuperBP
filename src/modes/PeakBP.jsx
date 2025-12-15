@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { heroes } from '../heroes';
+import { heroes } from '../data/heroes.js';
 import TeamPanel from '../components/TeamPanel.jsx'; // <-- 加上 .jsx
 import HeroFilter from '../components/HeroFilter'; // 🔥 引入我们的新组件
 

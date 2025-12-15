@@ -1,16 +1,42 @@
-# React + Vite
+# SuperBP - 王者荣耀专业BP软件
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+这是一个基于Web的王者荣耀Ban/Pick工具，专为职业/半职业战队训练、复盘和战术分析设计。
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 项目结构说明
 
-## React Compiler
+以下是本项目核心文件和文件夹的功能介绍：
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### `/public`
+- **/heroes/**: 存放所有英雄的头像图片（如 `MaChao.jpg`）。这个文件夹里的内容会直接发布到网站根目录。
 
-## Expanding the ESLint configuration
+### `/src`
+存放应用的所有源代码。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **`/components`**: 存放可在多个模式中复用的“通用UI组件”。
+  - `TeamPanel.jsx`: 显示队伍阵容的侧边栏（包含Ban/Pick位）。
+  - `HeroFilter.jsx`: 强大的筛选器组件，包含搜索框、分路Tab和标签按钮。
+
+- **`/data`**: 存放静态数据。
+  - `heroes.js`: 核心的英雄数据库，包含127+位英雄的名字、拼音、分路和特性标签。
+  - `tagConfig.js`: 定义筛选器中所有标签的中文名和颜色配置。
+
+- **`/modes`**: 存放每种具体BP模式的核心逻辑。每个文件都是一个独立的“房间”。
+  - `PeakBP.jsx`: “巅峰赛模式”的逻辑。
+  - `GlobalBP.jsx`: “全局BP模式”（天府赛制）的逻辑。
+  - `CustomBP.jsx`: “自定义模式”，用于自由摆放阵容，进行战术推演。
+
+- **`App.jsx`**: 应用的主入口和“调度中心”。它本身不包含任何游戏逻辑，只像一个“交通警察”，根据用户的选择，决定该显示示哪个模式的界面。
+
+- **`StartScreen.jsx`**: 用户打开软件时看到的第一个界面（启动页），用于选择进入哪个模式。
+
+- **`main.jsx`**: React应用的启动文件，通常不需要修改。
+
+---
+
+## 🛠️ 如何在本地运行
+
+1. 克隆本项目仓库。
+2. 运行 `npm install` 安装所有依赖。
+3. 运行 `npm run dev` 启动本地开发服务器。

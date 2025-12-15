@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { heroes } from '../heroes';
+import { heroes } from '../data/heroes';
 import { TABS, TAGS } from '../data/tagConfig';
 
 // 这个组件接收一个 onFilterChange 回调，把筛选结果传回给父组件
