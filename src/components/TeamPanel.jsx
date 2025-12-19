@@ -1,11 +1,11 @@
 /**
  * @file TeamPanel.jsx
- * @description 通用队伍面板组件 (终极版)
+ * @description 通用队伍面板组件 (终极完美版 - 保留高亮 + 新增移除功能)
  */
 
 import React from 'react';
 
-export default function TeamPanel({ side, state, heroes, active, isBanPhase, banCount = 5 }) {
+export default function TeamPanel({ side, state, heroes, active, isBanPhase, banCount = 5, onRemove, isCustomMode = false }) {
   const isBlue = side === 'blue';
   
   const getAvatar = (hero) => `/heroes/${hero.pinyin}.jpg`;
@@ -29,13 +29,15 @@ export default function TeamPanel({ side, state, heroes, active, isBanPhase, ban
           const isCurrentBanSlot = active && isBanPhase && (state.bans.length === i);
 
           return (
-            <div key={`ban-${i}`} className={`
-              relative w-8 h-8 rounded-full border transition-all duration-300 overflow-hidden shadow-inner flex items-center justify-center
-              ${isCurrentBanSlot 
-                ? `border-transparent ring-2 ring-offset-1 ring-offset-[#0A101A] ${isBlue ? 'ring-blue-500' : 'ring-red-500'} animate-pulse bg-slate-800` 
-                : 'border-slate-800 bg-slate-950/50'
-              }
-            `}>
+            <div 
+              key={`ban-${i}`} 
+              onClick={() => isCustomMode && hero && onRemove(side, 'bans', hero.id)}
+              className={`
+                relative w-8 h-8 rounded-full border transition-all duration-300 overflow-hidden shadow-inner flex items-center justify-center
+                ${isCurrentBanSlot ? `border-transparent ring-2 ring-offset-1 ring-offset-[#0A101A] ${isBlue ? 'ring-blue-500' : 'ring-red-500'} animate-pulse bg-slate-800` : 'border-slate-800 bg-slate-950/50'}
+                ${isCustomMode && hero ? 'cursor-pointer hover:opacity-70' : ''}
+              `}
+            >
                {hero ? (
                  <>
                    <img src={getAvatar(hero)} className="w-full h-full object-cover grayscale opacity-60" />
@@ -53,19 +55,18 @@ export default function TeamPanel({ side, state, heroes, active, isBanPhase, ban
       <div className="flex-1 flex flex-col p-2 gap-2 overflow-y-auto no-scrollbar">
         {displayPicks.map((heroId, index) => {
           const hero = heroId ? heroes.find(h => h.id === heroId) : null;
-          // 🔥 最终高亮逻辑
           const isCurrentPickSlot = active && !isBanPhase && (state.picks.length === index);
           
           return (
-            <div key={`pick-${index}`} className={`
-              flex-1 relative rounded-lg border overflow-hidden flex items-center justify-center transition-all duration-500
-              ${hero 
-                ? 'border-slate-600 bg-slate-800' 
-                : isCurrentPickSlot 
-                  ? `border-transparent ring-2 ring-offset-2 ring-offset-[#0A101A] ${isBlue ? 'ring-blue-500' : 'ring-red-500'} bg-slate-800 animate-pulse` 
-                  : 'border-white/5 bg-slate-800/20'
-              }
-            `}>
+            <div 
+              key={`pick-${index}`} 
+              onClick={() => isCustomMode && hero && onRemove(side, 'picks', hero.id)}
+              className={`
+                flex-1 relative rounded-lg border overflow-hidden flex items-center justify-center transition-all duration-500
+                ${hero ? 'border-slate-600 bg-slate-800' : isCurrentPickSlot ? `border-transparent ring-2 ring-offset-2 ring-offset-[#0A101A] ${isBlue ? 'ring-blue-500' : 'ring-red-500'} bg-slate-800 animate-pulse` : 'border-white/5 bg-slate-800/20'}
+                ${isCustomMode && hero ? 'cursor-pointer hover:border-red-500' : ''}
+              `}
+            >
               {hero ? (
                 <>
                    <img src={getAvatar(hero)} className="absolute inset-0 w-full h-full object-cover" />
